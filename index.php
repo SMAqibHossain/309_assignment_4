@@ -135,7 +135,6 @@
                     list($convertedTime, $dayName) = convertDateAndTime($list->dt_txt) ?>
                     <tr>
 
-                        <!-- <td scope="row"><?= $list->clouds->all ?></td> -->
                         <th><?= $i++ ?></th>
                         <td><?= $dayName . " " . $convertedTime  ?></td>
                         <td><?= $list->main->temp ?></td>
