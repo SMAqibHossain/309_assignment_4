@@ -73,20 +73,21 @@
         if (isset($_POST['city'])) {
             $chosenCity = $_POST['city'];
         }
-// api url 
         $url = "https://api.openweathermap.org/data/2.5/forecast?q=" . $chosenCity . "&appid=e3bc9d1e92afe12accae799af3de8496&units=" . $chosenUnit . "";
 
 
         $contents = file_get_contents($url);
         $clima = json_decode($contents);
-
-
         $city_name = $clima->city->name;
 
 
 
 
-
+        // function convert_time($dt_str)
+        // {
+        //   $dt = datetime::createFromFormat('Y-m-d H:i:s', $dt_str);
+        //   return $dt->format('Y-m-d g:i A');
+        // }
         function convertDateAndTime($dtStr)
         {
             $dateTime = new DateTime($dtStr);
@@ -132,7 +133,9 @@
                 <?php
                 $i = 1;
                 foreach ($clima->list as $list) {
-                    list($convertedTime, $dayName) = convertDateAndTime($list->dt_txt) ?>
+                    list($convertedTime, $dayName) = convertDateAndTime($list->dt_txt);
+                    // $tempIcon = "https://openweathermap.org/img/w/{$data['weather'][0]['icon']}.png"; 
+                ?>
                     <tr>
 
                         <th><?= $i++ ?></th>
@@ -145,7 +148,7 @@
                         <?php foreach ($list->weather as $weather) { ?>
 
                             <td><?= $weather->main ?></td>
-                            <td><?= $weather->description ?></td>
+                            <td> <img class="weather-icon" src="https://openweathermap.org/img/w/<?= $weather->icon ?>.png" alt="Temperature Icon"><?= $weather->description ?> </td>
 
                         <?php } ?>
 
